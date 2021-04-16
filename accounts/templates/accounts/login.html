@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="hold-transition login-page">
+        <div id="app">
+            <main class="py-4">
+                <div class="login-box">
+                    <div class="login-logo">
+                        <a href="/"><b>Django User Login</b></a>
+                    </div>
+                    <!-- / login-logo -->
+                    <div class="card">
+                        <div class="card-body login-card-body">
+                            <p class="login-box-msg">Sign in to start your session</p>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="input-group mb-3">
+                                    <input type="email" class="form-control " name="email" placeholder="Email" required
+                                           autofocus>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-envelope"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="password" name="password" class="form-control " placeholder="Password"
+                                           required>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-lock"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% for field in login_form %}
+                                    {% for error in field.errors %}
+                                        <div style="color: red; text-align: center; list-style: none">
+                                            <p>{{ error | striptags }}</p>
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+
+                                {% if login_form.non_field_errors %}
+                                    <div style="color: red; text-align: center; list-style: none;">
+                                        <p>{{ login_form.non_field_errors | striptags }}</p>
+                                    </div>
+                                {% endif %}
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="icheck-primary">
+                                            <input type="checkbox" name="remember" id="remember">
+                                            <label for="remember">
+                                                Remember Me
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- / col -->
+                                    <div class="col-4">
+                                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                                    </div>
+                                    <!-- / col -->
+                                </div>
+                            </form>
+                            <p class="mb-1">
+                                <a href="#">Forgot Password?</a>
+                            </p>
+                            <div class="social-auth-links text-center mb-3">
+                                <p>- OR -</p>
+                                <a href="/register/" class="btn btn-block btn-primary">
+                                    Register a new user
+                                </a>
+                                <a href="/" class="btn btn-block btn-success">Back to Homepage</a>
+                            </div>
+                        </div>
+                        <!-- / login-card-body -->
+                    </div>
+                </div>
+                <!-- / login-box -->
+            </main>
+        </div>
+    </div>
+{% endblock main %}

@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="hold-transition login-page">
+        <div id="app">
+            <main class="py-4">
+                <!-- form-box -->
+                <div class="register-box">
+                    <div class="register-logo">
+                        <a href="/register/">Django User Registration</a>
+                    </div>
+                    <!-- card -->
+                    <div class="card">
+                        <div class="card-body register-card-body">
+                            <p class="login-box-msg">Register a new user</p>
+
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="input-group mb-3">
+
+                                    <input type="text" class="form-control " name="first_name" value="" required
+                                           autocomplete="first_name" autofocus placeholder="First name">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-user"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control " name="last_name" value="" required
+                                           autocomplete="last_name" placeholder="Last name">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-user"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="email" class="form-control " name="email" value="" required
+                                           autocomplete="email" placeholder="Email">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-envelope"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="password" class="form-control " name="password1" required
+                                           autocomplete="new-password" placeholder="Password">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-lock"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="password" class="form-control" name="password2" required
+                                           autocomplete="new-password" placeholder="Retype password">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-lock"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% for field in registration_form %}
+                                    {% for error in field.errors %}
+                                        <div style="color: red; text-align: center; list-style: none">
+                                            <p>{{ error | striptags }}</p>
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+
+                                {% if registration_form.non_field_errors %}
+                                    <div style="color: red; text-align: center; list-style: none;">
+                                        <p>{{ registration_form.non_field_errors | striptags }}</p>
+                                    </div>
+                                {% endif %}
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="icheck-primary">
+                                            <input type="checkbox" id="agreeTerms" name="terms" value="agree" reqiured>
+                                            <label for="agreeTerms">
+                                                I agree to the <a href="/terms/">terms and conditions</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- col -->
+                                    <div class="col-4">
+                                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                                    </div>
+                                    <!-- / col -->
+                                </div>
+                            </form>
+
+                            <div class="social-auth-links text-center">
+                                <p>- OR -</p>
+                                <a href="/login/" class="btn btn-block btn-primary">
+                                    Already register? Please Login now
+                                </a>
+                                <a href="/" class="btn btn-block btn-success">
+                                    Back to Home
+                                </a>
+                            </div>
+                        </div>
+                        <!-- / form-box -->
+                    </div><!-- / card -->
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock main %}

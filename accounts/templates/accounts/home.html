@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <h1>You are currently viewing home template</h1>
+    Email: {{ request.user.email }} <br>
+    First Name: {{ request.user.first_name }} <br>
+    last Name: {{ request.user.last_name }} <br>
+    <a href="/register/">Register</a>
+    <a href="/logout/">Logout</a>
+{% endblock main %}

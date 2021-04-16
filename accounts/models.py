@@ -8,7 +8,8 @@ def set_username(sender, instance, **kwargs):
         username = (instance.first_name + "." + instance.last_name).lower()
         counter = 1
         while User.objects.filter(username=username):
-            username = username + str(counter)
+            username += str(counter)
+            counter += 1
         instance.username = username
 
 
@@ -67,7 +68,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(auto_now_add=True)
 
-    EMAIL_FIELD = 'email'
+    # EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']
 
